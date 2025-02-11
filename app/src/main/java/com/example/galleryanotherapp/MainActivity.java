@@ -2,8 +2,10 @@ package com.example.galleryanotherapp;
 
 import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
 import static android.Manifest.permission.READ_MEDIA_IMAGES;
+import static android.Manifest.permission.READ_MEDIA_VIDEO;
 import static android.os.Environment.MEDIA_MOUNTED;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -53,19 +55,27 @@ public class MainActivity extends AppCompatActivity {
         recycler.setAdapter(adapter);
         recycler.setLayoutManager(manager);
 
+        onStart();
+        {
+            if(checkPermissions())
+            {
+                loadImages();
+            }
+            else {
+                requestPermission();
+            }
+        }
 
-
-        checkPermissions();
     }
 
-    private void checkPermissions() {
-        int result= ContextCompat.checkSelfPermission(getApplicationContext(), READ_MEDIA_IMAGES);
+    private boolean checkPermissions() {
+        int result= ContextCompat.checkSelfPermission(getApplicationContext(), READ_EXTERNAL_STORAGE);
         if(result== PackageManager.PERMISSION_GRANTED)
         {
-            loadImages();
+           return true;
         }
         else {
-            ActivityCompat.requestPermissions(this,new String[]{READ_EXTERNAL_STORAGE},PERMISSION_REQUEST_CODE);
+         return false;
         }
     }
 
@@ -108,5 +118,15 @@ public class MainActivity extends AppCompatActivity {
             cursor.close();
         }
     }
+    private void requestPermission() {
+        if (ActivityCompat.shouldShowRequestPermissionRationale(MainActivity.this, READ_MEDIA_IMAGES)) {
+            Toast.makeText(this, "Storage permission required", Toast.LENGTH_SHORT).show();
+        } else
+            ActivityCompat.requestPermissions(MainActivity.this, new String[]{READ_MEDIA_IMAGES}, 111);
+
+
+    }
+
+
 
 }

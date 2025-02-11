@@ -4,9 +4,11 @@
 
     <uses-sdk android:maxSdkVersion="34" />
 
-    <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES"/>
+    <uses-permission android:name="android.permission.READ_MEDIA_VIDEO"/>
+    <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
     <permission android:name="media" />
 
@@ -22,7 +24,7 @@
         android:theme="@style/Theme.Galleryanotherapp"
         tools:targetApi="31">
         <activity
-            android:name=".viewPicture"
+            android:name=".ViewPicture"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

@@ -46,8 +46,8 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.ViewHold
         holder.image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(context, viewPicture.class);
-                intent.putExtra("image_file",image_file);
+                Intent intent=new Intent(context, ViewPicture.class);
+                intent.putExtra("image_file", image_file.getAbsolutePath());
                 context.startActivity(intent);
             }
         });
